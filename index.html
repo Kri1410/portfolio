@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="no" data-theme="auto">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kristoffer Holmsen — Portefølje</title>
+  <meta name="description" content="Utvalgte prosjekter av Kristoffer Holmsen — nettsider, prototyper og spill.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◈</text></svg>">
+</head>
+<body>
+  <a class="skip-link" href="#prosjekter">Hopp til prosjekter</a>
+
+  <!-- ============ Navigasjon ============ -->
+  <header class="nav" id="nav">
+    <nav class="nav__inner" aria-label="Hovedmeny">
+      <a class="nav__brand" href="#top">
+        <span class="nav__mark" aria-hidden="true">KH</span>
+        <span class="nav__name">Kristoffer Holmsen</span>
+      </a>
+
+      <ul class="nav__links">
+        <li><a href="#prosjekter">Prosjekter</a></li>
+        <li><a href="#om">Om</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+
+      <button class="theme-toggle" id="themeToggle" type="button"
+              aria-label="Bytt fargetema" title="Bytt fargetema">
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <g stroke-linecap="round">
+            <path d="M12 2.4v2.4M12 19.2v2.4M4.2 12H1.8M22.2 12h-2.4M6.5 6.5 4.8 4.8M19.2 19.2l-1.7-1.7M17.5 6.5l1.7-1.7M4.8 19.2l1.7-1.7"/>
+          </g>
+        </svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/>
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- ============ Hero ============ -->
+    <section class="hero">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="hero__eyebrow reveal">Portefølje</p>
+        <h1 class="hero__title reveal" id="heroTitle">Jeg bygger nettsider, apper og spill.</h1>
+        <p class="hero__lede reveal" id="heroLede"></p>
+        <div class="hero__actions reveal">
+          <a class="btn btn--primary" href="#prosjekter">Se prosjektene</a>
+          <a class="btn btn--ghost" id="heroGithub" href="https://github.com/Kri1410" target="_blank" rel="noopener">
+            GitHub <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Prosjekter ============ -->
+    <section class="section" id="prosjekter">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <h2 class="section__title">Utvalgte prosjekter</h2>
+          <p class="section__sub">Trykk på et kort for å lese mer.</p>
+        </header>
+
+        <div class="segmented reveal" id="filters" role="tablist" aria-label="Filtrer prosjekter">
+          <span class="segmented__thumb" aria-hidden="true"></span>
+        </div>
+
+        <div class="grid" id="grid" aria-live="polite"></div>
+
+        <p class="grid__empty" id="gridEmpty" hidden>Ingen prosjekter i denne kategorien ennå.</p>
+      </div>
+    </section>
+
+    <!-- ============ Om ============ -->
+    <section class="section section--alt" id="om">
+      <div class="wrap wrap--narrow">
+        <header class="section__head reveal">
+          <h2 class="section__title">Om meg</h2>
+        </header>
+        <div class="prose reveal" id="aboutText"></div>
+
+        <dl class="facts reveal" id="facts"></dl>
+      </div>
+    </section>
+
+    <!-- ============ Kontakt ============ -->
+    <section class="section section--contact" id="kontakt">
+      <div class="wrap wrap--narrow center">
+        <h2 class="section__title reveal">La oss bygge noe.</h2>
+        <p class="section__sub reveal">Har du et prosjekt, en idé eller bare et spørsmål — send meg en melding.</p>
+        <div class="hero__actions center reveal" id="contactActions"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <p>© <span id="year"></span> Kristoffer Holmsen</p>
+      <p class="footer__meta">Bygget for hånd med HTML, CSS og JavaScript.</p>
+    </div>
+  </footer>
+
+  <!-- ============ Detaljvisning (iOS-ark) ============ -->
+  <div class="sheet-backdrop" id="sheetBackdrop" hidden></div>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden>
+    <div class="sheet__grabber" aria-hidden="true"></div>
+    <button class="sheet__close" id="sheetClose" type="button" aria-label="Lukk">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6.6 6.6 10.8 10.8M17.4 6.6 6.6 17.4" stroke-linecap="round"/></svg>
+    </button>
+    <div class="sheet__scroll" id="sheetScroll"></div>
+  </div>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
