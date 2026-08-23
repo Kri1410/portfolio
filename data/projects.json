@@ -11,13 +11,20 @@
       "De siste årene har jeg jobbet med alt fra Next.js og TypeScript til Godot 4 og rå canvas-rendering i JavaScript. Under finner du et utvalg av prosjektene jeg er mest fornøyd med. Alle bildene er ekte skjermbilder, og spillene viser en levende forhåndsvisning bygget av spillenes egne grafikkressurser."
     ]
   },
-
   "categories": [
-    { "id": "alle", "label": "Alle" },
-    { "id": "web", "label": "Web" },
-    { "id": "spill", "label": "Spill" }
+    {
+      "id": "alle",
+      "label": "Alle"
+    },
+    {
+      "id": "web",
+      "label": "Web"
+    },
+    {
+      "id": "spill",
+      "label": "Spill"
+    }
   ],
-
   "projects": [
     {
       "id": "spireslayer",
@@ -27,11 +34,18 @@
       "featured": true,
       "year": "2026",
       "role": "Design og programmering",
-      "accent": ["#FF375F", "#FF9F0A"],
-      "tech": ["Godot 4", "GDScript"],
+      "accent": [
+        "#FF375F",
+        "#FF9F0A"
+      ],
+      "tech": [
+        "Godot 4",
+        "GDScript"
+      ],
       "private": false,
-      "media": { "type": "demo", "id": "spire" },
-      "links": { "repo": "https://github.com/Kri1410/SpireSlayer" },
+      "links": {
+        "repo": "https://github.com/Kri1410/SpireSlayer"
+      },
       "summary": "Et kortbasert action-spill der du klatrer oppover et tårn, én etasje og én kortstokk om gangen.",
       "description": [
         "SpireSlayer er en roguelike deckbuilder der du klatrer oppover et tårn. Hver etasje gir nye fiender, nye kort og nye valg for hvordan kortstokken din utvikler seg — og et tapt løp betyr at du starter på nytt nederst.",
@@ -44,6 +58,18 @@
         "Tre spillbare klasser med egne kortstokker og relikvier",
         "Turbasert kamp med energi, block og statuseffekter",
         "Prosedyregenerert tårnprogresjon med bosskamper"
+      ],
+      "gallery": [
+        {
+          "type": "demo",
+          "id": "spire",
+          "caption": "Kampscene: The Ronin mot bossen NightBorne, med startkortstokken på hånden."
+        },
+        {
+          "type": "demo",
+          "id": "spireSelect",
+          "caption": "Klassevalget — tre spillbare klasser med hver sin kortstokk og relikvie."
+        }
       ]
     },
     {
@@ -54,10 +80,15 @@
       "featured": true,
       "year": "2026",
       "role": "Design og programmering",
-      "accent": ["#30D158", "#0A84FF"],
-      "tech": ["Godot 4", "GDScript"],
+      "accent": [
+        "#30D158",
+        "#0A84FF"
+      ],
+      "tech": [
+        "Godot 4",
+        "GDScript"
+      ],
       "private": true,
-      "media": { "type": "demo", "id": "mon" },
       "links": {},
       "summary": "Et 2D top-down creature-collector-spill med egne skapninger, byer, ruter, kamper og lagring.",
       "description": [
@@ -72,6 +103,18 @@
         "Save/load av full spilltilstand",
         "Kart som redigerbare tekstfiler",
         "Fullt mus- og tastaturnavigerbare menyer"
+      ],
+      "gallery": [
+        {
+          "type": "demo",
+          "id": "mon",
+          "caption": "Kamp mot en vill Embercat. Bublet er ute, 39 av 50 HP igjen."
+        },
+        {
+          "type": "demo",
+          "id": "monStarters",
+          "caption": "Startervalget — tre originale skapninger, én av hver grunntype."
+        }
       ]
     },
     {
@@ -82,24 +125,67 @@
       "featured": true,
       "year": "2026",
       "role": "Design og programmering",
-      "accent": ["#5E5CE6", "#BF5AF2"],
-      "tech": ["JavaScript", "Canvas", "Node.js"],
+      "accent": [
+        "#5E5CE6",
+        "#BF5AF2"
+      ],
+      "tech": [
+        "JavaScript",
+        "Canvas",
+        "Node.js"
+      ],
       "private": false,
-      "media": { "type": "image", "src": "bilder/soulsking.webp" },
-      "links": { "repo": "https://github.com/Kri1410/jumpKing" },
+      "links": {
+        "repo": "https://github.com/Kri1410/jumpKing"
+      },
       "summary": "Jump King møter Dark Souls: uavbrytbare hopp, bålplass-checkpoints og bosskamper — alt i ren JavaScript.",
       "description": [
         "Souls King startet som en Jump King-prototype og vokste til noe eget: et presisjonsplattformspill med Souls-mekanikker. Hoppet lades opp og kan ikke avbrytes, så én feilberegning sender deg flere skjermer ned.",
-        "Bålplasser fungerer som checkpoints og helbreder deg, og verden er delt i navngitte områder du klatrer gjennom — Forest route, Glowing depths, Crumbling heights og Ancient gateway — før den siste bosskampen.",
+        "Bålplasser fungerer som checkpoints og helbreder deg, og verden er delt i åtte navngitte områder du klatrer gjennom — fra Forest Edge og Crimson Cavern via Dark Temple og Ruined Citadel til The Pinnacle — før den siste bosskampen i Boss Room.",
         "Fire spillbare karakterer (Fighter, Samurai, Shinobi og Destiny) har hver sine animasjoner, med angrep, blokk, jump attack og spesialangrep.",
         "Alt er skrevet i ren JavaScript mot canvas-API-et — fysikk, kollisjon, kamera og animasjon er implementert fra bunnen uten spillmotor eller biblioteker. Rundt 6 300 linjer i én motorfil, servert av en Node-server uten byggesteg."
       ],
       "highlights": [
         "Egen fysikk-, kollisjons- og kameramotor i ren JavaScript",
         "Fire spillbare karakterer med kamp, blokk og spesialangrep",
-        "Bålplass-checkpoints og bosskamper på tvers av fem områder",
+        "Bålplass-checkpoints og bosskamp på tvers av åtte områder",
         "Null avhengigheter og null byggesteg — `node server.js` og du er i gang"
-      ]
+      ],
+      "gallery": [
+        {
+          "type": "image",
+          "src": "bilder/soulsking.webp",
+          "caption": "Forest Edge. Bålplassen er tent, så checkpointet er aktivt."
+        },
+        {
+          "type": "image",
+          "src": "bilder/soulsking-tempel.webp",
+          "caption": "Dark Temple — «Ancient gateway», tredje område på vei opp."
+        },
+        {
+          "type": "image",
+          "src": "bilder/soulsking-citadell.webp",
+          "caption": "Ruined Citadel. Fiender, bålplass og et rødt lysskjær over alt."
+        },
+        {
+          "type": "image",
+          "src": "bilder/soulsking-boss.webp",
+          "caption": "Boss Room — «The final stand». Siste kamp i spillet."
+        },
+        {
+          "type": "image",
+          "src": "bilder/soulsking-pinnacle.webp",
+          "caption": "The Pinnacle, over skyene. Ett feilhopp og du faller langt."
+        }
+      ],
+      "live": {
+        "src": "sider/soulsking/",
+        "label": "Souls King",
+        "heading": "Spill det i nettleseren",
+        "cta": "Spill nå",
+        "hint": "Klikk inn i vinduet først. WASD eller piltaster for å bevege deg, hold mellomrom for å lade hoppet. Rundt 20 MB lastes ned.",
+        "poster": "bilder/soulsking.webp"
+      }
     },
     {
       "id": "foliegutta",
@@ -109,10 +195,16 @@
       "featured": false,
       "year": "2026",
       "role": "Design og utvikling",
-      "accent": ["#F5C518", "#1D1D1F"],
-      "tech": ["HTML", "CSS", "JavaScript"],
+      "accent": [
+        "#F5C518",
+        "#1D1D1F"
+      ],
+      "tech": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
       "private": true,
-      "media": { "type": "image", "src": "bilder/foliegutta.webp" },
       "links": {},
       "summary": "Komplett nettside for et bilfolieringsfirma i Bø — galleri, tjenester og tilbudsskjema, bygget uten rammeverk.",
       "description": [
@@ -126,7 +218,37 @@
         "Interaktiv konfigurator for farge, glans og sotgrad",
         "Tilbudsskjema og FAQ-seksjon",
         "Responsivt design helt uten rammeverk"
-      ]
+      ],
+      "gallery": [
+        {
+          "type": "image",
+          "src": "bilder/foliegutta.webp",
+          "caption": "Forsiden, med verkstedet i Bø."
+        },
+        {
+          "type": "image",
+          "src": "bilder/foliegutta-tjenester.webp",
+          "caption": "Tjenestene: foliering, lakkforsegling, solfilm og ruteforsegling."
+        },
+        {
+          "type": "image",
+          "src": "bilder/foliegutta-lakk.webp",
+          "caption": "Lakkbeskyttelse, med de utsatte sonene på bilen forklart."
+        },
+        {
+          "type": "image",
+          "src": "bilder/foliegutta-konfigurator.webp",
+          "caption": "Konfiguratoren: velg farge, glans og sotgrad og se resultatet med én gang."
+        }
+      ],
+      "live": {
+        "src": "sider/foliegutta/",
+        "label": "foliegutta — bilfoliering i Bø",
+        "heading": "Bla gjennom siden",
+        "cta": "Åpne siden",
+        "hint": "Den ekte siden, kjørende her. Scroll, klikk i galleriet og prøv konfiguratoren.",
+        "poster": "bilder/foliegutta.webp"
+      }
     },
     {
       "id": "designprototype",
@@ -136,10 +258,17 @@
       "featured": false,
       "year": "2026",
       "role": "UX og prototyping",
-      "accent": ["#0A84FF", "#0B3B70"],
-      "tech": ["HTML", "CSS", "JavaScript", "UX"],
+      "accent": [
+        "#0A84FF",
+        "#0B3B70"
+      ],
+      "tech": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "UX"
+      ],
       "private": true,
-      "media": { "type": "image", "src": "bilder/mineiendom.webp" },
       "links": {},
       "summary": "Klikkbar prototype for en kommunal eiendomstjeneste, laget for brukertesting før utvikling.",
       "description": [
@@ -152,7 +281,32 @@
         "Sammendrag med frister, eiendomsskatt og eierforhold øverst",
         "Kartvisning med grunnkart, flyfoto, reguleringsplan og byggegrenser",
         "Fokus på informasjonsarkitektur og klarspråk"
-      ]
+      ],
+      "gallery": [
+        {
+          "type": "image",
+          "src": "bilder/mineiendom.webp",
+          "caption": "Oversikten: sammendrag med neste frist, og hurtigvalg for de vanligste oppgavene."
+        },
+        {
+          "type": "image",
+          "src": "bilder/mineiendom-detaljer.webp",
+          "caption": "Eiendomsdetaljer med nøkkelopplysninger og kartvisning."
+        },
+        {
+          "type": "image",
+          "src": "bilder/mineiendom-dokumenter.webp",
+          "caption": "Dokumenter, varsler og pågående byggesaker samlet på ett sted."
+        }
+      ],
+      "live": {
+        "src": "sider/mineiendom/",
+        "label": "Min eiendom — Kristiansand kommune",
+        "heading": "Prøv prototypen",
+        "cta": "Åpne prototypen",
+        "hint": "Klikkbar prototype med oppdiktede eksempeldata. Bytt fane, åpne kartet, søk om tiltak.",
+        "poster": "bilder/mineiendom.webp"
+      }
     },
     {
       "id": "nettside-cv",
@@ -162,10 +316,16 @@
       "featured": false,
       "year": "2026",
       "role": "Design og utvikling",
-      "accent": ["#0A84FF", "#5E5CE6"],
-      "tech": ["Next.js", "TypeScript", "React"],
+      "accent": [
+        "#0A84FF",
+        "#5E5CE6"
+      ],
+      "tech": [
+        "Next.js",
+        "TypeScript",
+        "React"
+      ],
       "private": true,
-      "media": { "type": "image", "src": "bilder/cv.webp" },
       "links": {},
       "summary": "En CV som nettside i stedet for PDF, bygget med Next.js App Router og TypeScript.",
       "description": [
@@ -178,7 +338,42 @@
         "Innhold som strukturert, typet data",
         "Mørkt tema og nedlastbar PDF-versjon",
         "Responsivt oppsett fra mobil til desktop"
-      ]
+      ],
+      "gallery": [
+        {
+          "type": "image",
+          "src": "bilder/cv.webp",
+          "caption": "Forsiden med kort presentasjon og snarveier."
+        },
+        {
+          "type": "image",
+          "src": "bilder/cv-om.webp",
+          "caption": "Om meg — bakgrunn, arbeidsstil og kompetanse."
+        },
+        {
+          "type": "image",
+          "src": "bilder/cv-prosjekter.webp",
+          "caption": "Prosjektlisten, med lenker til GitHub og Figma."
+        },
+        {
+          "type": "image",
+          "src": "bilder/cv-erfaring.webp",
+          "caption": "Utdanning og arbeidserfaring på tidslinje."
+        },
+        {
+          "type": "image",
+          "src": "bilder/cv-kontakt.webp",
+          "caption": "Kontaktsiden."
+        }
+      ],
+      "live": {
+        "src": "sider/cv/",
+        "label": "Interaktiv CV",
+        "heading": "Bla gjennom CV-en",
+        "cta": "Åpne CV-en",
+        "hint": "Naviger mellom om meg, prosjekter, erfaring og kontakt.",
+        "poster": "bilder/cv.webp"
+      }
     }
   ]
 }

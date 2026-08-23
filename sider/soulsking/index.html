@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Silk Souls Prototype</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="title-block">
+          <h1>SOULS KING</h1>
+        </div>
+        <div class="status-tools">
+          <div class="stats">
+            <span id="status-label">Ready</span>
+            <span id="height-label">Height 0 m</span>
+          </div>
+          <label class="character-picker" for="character-select">
+            <span>Character</span>
+            <select id="character-select" aria-label="Choose character"></select>
+          </label>
+          <button id="fullscreen-btn" aria-label="Enter fullscreen">&#x26F6; Fullscreen</button>
+        </div>
+      </header>
+
+      <section class="stage-frame">
+        <canvas id="game" width="960" height="540" tabindex="0" aria-label="Silk Souls prototype canvas"></canvas>
+        <!-- Pause menu overlay -->
+        <div id="pause-menu" class="fs-menu" hidden>
+          <div class="fs-menu-panel">
+            <h2>Paused</h2>
+            <div class="fs-menu-actions">
+              <button id="resume-button">Resume</button>
+              <button id="restart-button">Restart</button>
+              <button id="fullscreen-button">Enter Fullscreen</button>
+            </div>
+          </div>
+        </div>
+        <!-- Fullscreen overlay menu (ESC to toggle) -->
+        <div id="fs-menu" class="fs-menu" hidden>
+          <div class="fs-menu-panel">
+            <h2>Menu</h2>
+            <div class="fs-menu-actions">
+              <button id="fs-resume-btn">Resume</button>
+              <button id="fs-restart-btn">Restart</button>
+              <button id="fs-exit-fs-btn">Exit Fullscreen</button>
+            </div>
+          </div>
+        </div>
+        <div class="control-bar">
+          <span>Space / W / Up to jump</span>
+          <span>A/D or arrows to move</span>
+          <span>Shift to dash</span>
+          <span>Left click attack</span>
+          <span>Right click block</span>
+          <span>R for lightning stab</span>
+          <span>Base floor door leads to boss arena</span>
+          <span>After boss + bell, go right to enter the forest</span>
+          <span>Forest bonfire heals and saves checkpoint</span>
+          <span>ESC to pause/menu</span>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="src/game.js"></script>
+  </body>
+</html>

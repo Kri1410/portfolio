@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Min eiendom - Kristiansand kommune</title>
+  <link rel="stylesheet" href="css/min-eiendom.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <a class="skip" href="#innhold">Gå til innhold</a>
+
+  <header>
+    <div class="wrap">
+      <div class="topbar">
+        <div class="brand">
+          <div class="seal" aria-hidden="true">KS</div>
+          <div>
+            <p class="subtitle">Kristiansand kommune</p>
+            <h1 class="title">Min eiendom</h1>
+          </div>
+        </div>
+        <div class="utility" aria-label="Hurtigvalg">
+          <button class="utility-btn" type="button">Språk</button>
+          <button class="utility-btn" type="button">Min side</button>
+          <button class="utility-btn" type="button">Søk</button>
+          <button class="utility-btn" type="button">Meny</button>
+        </div>
+      </div>
+      <nav aria-label="Sider">
+        <a href="#oversikt">Oversikt</a>
+        <a href="#detaljer">Eiendomsdetaljer</a>
+        <a href="#tiltak">Bygg og tiltak</a>
+        <a href="#dokumenter">Dokumenter</a>
+        <a href="#varsler">Varsler</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="innhold" class="wrap">
+    <section id="oversikt" class="grid">
+      <div class="hero">
+        <article class="card">
+          <h2 id="propertyName">Stjerneveien 12</h2>
+          <div class="pill" aria-label="Status aktiv">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="presentation">
+                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+                <path d="M8 12l3 3 5-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            Aktiv eiendom
+          </div>
+          <p>Du er logget inn som: <strong>Ingrid Nilsen</strong></p>
+          <div class="switcher">
+            <label for="property">Velg eiendom</label>
+            <select id="property" name="property">
+              <option value="Stjerneveien 12, 4634 Kristiansand" data-municipality="Kristiansand kommune" selected>Stjerneveien 12, 4634 Kristiansand</option>
+              <option value="Solbakken 5 (Hytte), 4790 Lillesand" data-municipality="Lillesand kommune">Solbakken 5 (Hytte), 4790 Lillesand</option>
+            </select>
+          </div>
+          <p class="info-note" id="municipalityNote">Regler og dokumenter vises for Kristiansand kommune.</p>
+        </article>
+
+        <article class="card">
+          <h2>Sammendrag</h2>
+          <div class="stats">
+            <div class="stat">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="presentation">
+                  <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+                  <path d="M12 7v6l4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <div>
+                <strong>Neste frist</strong>
+                <span>Svar på nabovarsel innen 10 dager</span>
+              </div>
+            </div>
+            <div class="stat">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="presentation">
+                  <rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+                  <path d="M7 10h10M7 14h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+              <div>
+                <strong>Eiendomsskatt</strong>
+                <span>6 420 kr - betalt 12.02</span>
+              </div>
+            </div>
+            <div class="stat">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="presentation">
+                  <circle cx="9" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="2" />
+                  <circle cx="16" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="2" />
+                  <path d="M4 20c1.5-3 8.5-3 10 0M12 20c1-2 5-2 7 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+              <div>
+                <strong>Eierforhold</strong>
+                <span>2 eiere registrert</span>
+              </div>
+            </div>
+            <div class="stat">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="presentation">
+                  <rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+                  <path d="M4 12h16M12 4v16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+              <div>
+                <strong>Areal</strong>
+                <span>BRA 146 m²</span>
+              </div>
+            </div>
+            <div class="stat">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="presentation">
+                  <path d="M6 3h12v18H6z" fill="none" stroke="currentColor" stroke-width="2" />
+                  <path d="M9 7h6M9 11h6M9 15h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+              <div>
+                <strong>Kontaktpunkt</strong>
+                <span>Byggesak: 38 07 50 00</span>
+              </div>
+            </div>
+          </div>
+          <button class="btn secondary" id="tts" type="button">Les opp sammendrag</button>
+        </article>
+
+        <article class="card">
+          <h2>Hurtigvalg</h2>
+          <div class="actions">
+            <a class="btn" href="#tiltak">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="presentation">
+                  <path d="M12 3l8 6v12H4V9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                  <path d="M9 21v-6h6v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+              Søk om tiltak
+            </a>
+            <a class="btn secondary" href="#dokumenter">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="presentation">
+                  <path d="M6 3h9l3 3v15H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                  <path d="M15 3v3h3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+              Se dokumenter
+            </a>
+            <button class="btn secondary" type="button">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="presentation">
+                  <path d="M4 12h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  <path d="M12 4v16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+              Meld feil på eiendom
+            </button>
+          </div>
+          <p class="info-note">Vi hjelper deg videre uten at du må kjenne reglene på forhånd.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="detaljer" class="grid">
+      <div class="section-title">
+        <h2>Eiendomsdetaljer</h2>
+        <span>Det viktigste, samlet og forklart</span>
+      </div>
+      <div class="two-col">
+        <div class="card">
+          <h3>Nøkkelopplysninger</h3>
+          <div class="facts">
+            <div class="fact">
+              <label>Adresse</label>
+              <span>Stjerneveien 12, 4634 Kristiansand</span>
+            </div>
+            <div class="fact">
+              <label class="tooltip">
+                BRA
+                <span class="tip-wrap">
+                  <button class="tip-btn" type="button" aria-describedby="tip-bra" aria-label="Hva betyr BRA">?</button>
+                  <span class="tip-text" id="tip-bra" role="tooltip">BRA er bruksareal: summen av gulvareal innenfor boligen, målt etter gjeldende standard.</span>
+                </span>
+              </label>
+              <span>146 m²</span>
+            </div>
+            <div class="fact">
+              <label class="tooltip">
+                Gnr/Bnr
+                <span class="tip-wrap">
+                  <button class="tip-btn" type="button" aria-describedby="tip-gnr" aria-label="Hva betyr gårds- og bruksnummer">?</button>
+                  <span class="tip-text" id="tip-gnr" role="tooltip">Gårds- og bruksnummer identifiserer eiendommen i matrikkelen.</span>
+                </span>
+              </label>
+              <span>47 / 112</span>
+            </div>
+            <div class="fact">
+              <label>Boligtype</label>
+              <span>Enebolig</span>
+            </div>
+            <div class="fact">
+              <label>Byggeår</label>
+              <span>1998</span>
+            </div>
+            <div class="fact">
+              <label>Energiattest</label>
+              <span>Klasse C (gyldig til 2030)</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Kart og grenser</h3>
+          <div class="map-toolbar" role="tablist" aria-label="Velg karttype">
+            <button class="chip active" type="button" role="tab" aria-selected="true" aria-controls="map-grunnkart" data-map="grunnkart">Grunnkart</button>
+            <button class="chip" type="button" role="tab" aria-selected="false" aria-controls="map-flyfoto" data-map="flyfoto">Flyfoto</button>
+            <button class="chip" type="button" role="tab" aria-selected="false" aria-controls="map-skrafo" data-map="skrafo">Skråfoto</button>
+            <button class="chip" type="button" role="tab" aria-selected="false" aria-controls="map-regulering" data-map="regulering">Reguleringsplan</button>
+            <button class="chip" type="button" role="tab" aria-selected="false" aria-controls="map-byggegrenser" data-map="byggegrenser">Byggegrenser</button>
+          </div>
+          <div class="map-stage" role="region" aria-label="Kartvisning">
+            <figure id="map-grunnkart" class="map map-panel active" role="img" aria-label="Grunnkart med eiendomsgrense">
+              <span class="map-label">Grunnkart</span>
+              <svg class="map-building" viewBox="0 0 80 80" aria-hidden="true" focusable="false">
+                <polygon points="12,36 40,14 68,36" />
+                <rect x="18" y="36" width="44" height="30" rx="3" />
+                <rect x="34" y="46" width="12" height="20" rx="2" />
+                <rect x="24" y="42" width="8" height="8" rx="1" />
+                <rect x="48" y="42" width="8" height="8" rx="1" />
+              </svg>
+            </figure>
+            <figure id="map-flyfoto" class="map map-panel" role="img" aria-label="Flyfoto av eiendommen">
+              <span class="map-label">Flyfoto</span>
+              <svg class="map-building" viewBox="0 0 80 80" aria-hidden="true" focusable="false">
+                <polygon points="12,36 40,14 68,36" />
+                <rect x="18" y="36" width="44" height="30" rx="3" />
+                <rect x="34" y="46" width="12" height="20" rx="2" />
+                <rect x="24" y="42" width="8" height="8" rx="1" />
+                <rect x="48" y="42" width="8" height="8" rx="1" />
+              </svg>
+            </figure>
+            <figure id="map-skrafo" class="map map-panel" role="img" aria-label="Skråfoto av eiendommen">
+              <span class="map-label">Skråfoto</span>
+              <svg class="map-building" viewBox="0 0 80 80" aria-hidden="true" focusable="false">
+                <polygon points="12,36 40,14 68,36" />
+                <rect x="18" y="36" width="44" height="30" rx="3" />
+                <rect x="34" y="46" width="12" height="20" rx="2" />
+                <rect x="24" y="42" width="8" height="8" rx="1" />
+                <rect x="48" y="42" width="8" height="8" rx="1" />
+              </svg>
+            </figure>
+            <figure id="map-regulering" class="map map-panel" role="img" aria-label="Reguleringsplan med arealformål">
+              <span class="map-label">Reguleringsplan</span>
+              <svg class="map-building" viewBox="0 0 80 80" aria-hidden="true" focusable="false">
+                <polygon points="12,36 40,14 68,36" />
+                <rect x="18" y="36" width="44" height="30" rx="3" />
+                <rect x="34" y="46" width="12" height="20" rx="2" />
+                <rect x="24" y="42" width="8" height="8" rx="1" />
+                <rect x="48" y="42" width="8" height="8" rx="1" />
+              </svg>
+            </figure>
+            <figure id="map-byggegrenser" class="map map-panel" role="img" aria-label="Byggegrenser og utnyttelse">
+              <span class="map-label">Byggegrenser</span>
+              <svg class="map-building" viewBox="0 0 80 80" aria-hidden="true" focusable="false">
+                <polygon points="12,36 40,14 68,36" />
+                <rect x="18" y="36" width="44" height="30" rx="3" />
+                <rect x="34" y="46" width="12" height="20" rx="2" />
+                <rect x="24" y="42" width="8" height="8" rx="1" />
+                <rect x="48" y="42" width="8" height="8" rx="1" />
+              </svg>
+            </figure>
+          </div>
+          <div class="actions" style="margin-top: 12px;">
+            <button class="btn secondary" type="button">Last ned kart</button>
+            <button class="btn secondary" type="button">Del med medeier</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tiltak" class="grid">
+      <div class="section-title">
+        <h2>Bygg og tiltak</h2>
+        <span>Viser kun det som gjelder for valget ditt</span>
+      </div>
+      <div class="two-col">
+        <div class="card">
+          <h3>Velg hva du vil gjøre</h3>
+          <div class="radio-group" role="radiogroup" aria-label="Velg tiltak">
+            <label><input type="radio" name="tiltak" value="garasje" checked> Garasje eller bod</label>
+            <label><input type="radio" name="tiltak" value="basseng"> Basseng eller hageanlegg</label>
+            <label><input type="radio" name="tiltak" value="fasade"> Endre fasade eller vinduer</label>
+          </div>
+          <div class="info-note" id="contextBox" aria-live="polite">
+            <strong>Garasje eller bod</strong><br>
+            Du kan bygge inntil 50 m² uten søknad dersom avstand til nabo er over 1 meter.
+          </div>
+          <div class="actions">
+            <button class="btn" type="button">Start veiledet søknad</button>
+            <button class="btn secondary" type="button">Se kravliste</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Registrerte bygg</h3>
+          <div class="list">
+            <div class="list-item">
+              <strong>Enebolig</strong>
+              <span>Hovedbygg, 1998</span>
+              <div class="actions">
+                <button class="btn secondary" type="button">Se plantegning</button>
+                <button class="btn disabled" type="button" disabled aria-disabled="true">Melde endring (ikke tilgjengelig)</button>
+              </div>
+            </div>
+            <div class="list-item">
+              <strong>Garasje</strong>
+              <span>Tilbygg, 2010</span>
+              <div class="actions">
+                <button class="btn secondary" type="button">Last ned byggesak</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="dokumenter" class="grid">
+      <div class="section-title">
+        <h2>Dokumenter</h2>
+        <span>Alt på ett sted, sortert etter behov</span>
+      </div>
+      <div class="card">
+        <div class="list">
+          <div class="list-item">
+            <span class="tag">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="presentation">
+                  <path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.9-5.3-2.8-5.3 2.8 1-5.9-4.2-4.1 5.9-.9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                </svg>
+              </span>
+              Viktig
+            </span>
+            <strong>Ferdigattest for garasje (2010)</strong>
+            <span>PDF - 2 sider</span>
+          </div>
+          <div class="list-item">
+            <strong>Tegninger bolig (1998)</strong>
+            <span>PDF - 6 sider</span>
+          </div>
+          <div class="list-item">
+            <strong>Energiattest (2020)</strong>
+            <span>PDF - 1 side</span>
+          </div>
+          <div class="list-item">
+            <strong>Skattevedtak (2024)</strong>
+            <span>PDF - 3 sider</span>
+          </div>
+          <div class="list-item">
+            <strong>Reguleringsplan - nabolag</strong>
+            <span>PDF - 9 sider</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="varsler" class="grid">
+      <div class="section-title">
+        <h2>Varsler og pågående saker</h2>
+        <span>Det som haster vises først</span>
+      </div>
+      <div class="two-col">
+        <div class="card">
+          <h3>Nye varsler</h3>
+          <div class="list">
+            <div class="list-item alert">
+              <strong>Nabovarsel mottatt</strong>
+              <span>Frist for svar: 18. mars</span>
+            </div>
+            <div class="list-item">
+              <strong>Melding om vedlikehold av vei</strong>
+              <span>Info - ingen handling</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Pågående saker</h3>
+          <div class="list">
+            <div class="list-item">
+              <span class="tag">Under behandling</span>
+              <strong>Tilbygg - søknad 24/0187</strong>
+              <span>Forventer svar innen 3 uker</span>
+            </div>
+            <div class="list-item">
+              <span class="tag">Venter på deg</span>
+              <strong>Last opp nabosamtykke</strong>
+              <div class="actions">
+                <button class="btn" type="button">Last opp dokument</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt" class="grid">
+      <div class="section-title">
+        <h2>Kontakt og veiledning</h2>
+        <span>Rask hjelp - med ord som er lette å forstå</span>
+      </div>
+      <div class="two-col">
+        <div class="card">
+          <h3>Kontakt oss</h3>
+          <div class="actions">
+            <button class="btn" type="button">Ring saksbehandler</button>
+            <button class="btn secondary" type="button">Send trygg melding</button>
+            <button class="btn disabled" type="button" disabled aria-disabled="true">Chat (stengt nå)</button>
+          </div>
+          <p class="info-note">Åpningstid: Hverdager 09:00-15:00. Vi svarer innen 2 virkedager.</p>
+        </div>
+        <div class="card">
+          <h3>Veiledning</h3>
+          <div class="list">
+            <div class="list-item">
+              <strong>Hva betyr nabovarsel?</strong>
+              <span>En kort forklaring med eksempel</span>
+            </div>
+            <div class="list-item">
+              <strong>Hvordan søker jeg selv?</strong>
+              <span>Steg-for-steg med sjekkliste</span>
+            </div>
+            <div class="list-item">
+              <strong>Tilgjengelighet</strong>
+              <span>Tilpasninger for syn, språk og hjelpemidler</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>Du kan alltid be oss forklare fagord. Vi viser bare det som er relevant for eiendommen du har valgt.</p>
+  </footer>
+
+  <script src="js/min-eiendom.js"></script>
+</body>
+</html>

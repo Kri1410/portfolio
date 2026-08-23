@@ -100,6 +100,51 @@ const DEMOS = {
       </div>
     </div>`,
 
+  /* SpireSlayer — klassevalget. Navn, HP og tagline er hentet fra
+     CLASSES i spillets game_manager.gd. */
+  spireSelect: () => `
+    <div class="demo demo--pick">
+      <img class="demo__bg" src="bilder/spire-shrine.webp" alt="Menyskjermen i SpireSlayer" loading="lazy">
+      <div class="demo__vignette"></div>
+      <p class="pick__heading">Velg din klasse</p>
+      <div class="picker">
+        ${[
+          ['spire-ronin.webp',  'The Ronin',   75, 'Disiplinert sverdmann.<br>Høy skade mot ett mål.'],
+          ['spire-yumi.webp',   'The Yumi',    65, 'Jeger på avstand.<br>Flere treff og korttrekk.'],
+          ['spire-reaper.webp', 'Soul Reaper', 90, 'Tunge slag<br>og hardt forsvar.'],
+        ].map(([img, name, hp, text], i) => `
+          <div class="pick ${i === 1 ? 'pick--on' : ''}">
+            <img class="pick__art" src="bilder/${img}" alt="${esc(name)}" loading="lazy">
+            <b class="pick__name">${esc(name)}</b>
+            <span class="pick__hp">${hp} HP</span>
+            <em class="pick__text">${text}</em>
+          </div>`).join('')}
+      </div>
+    </div>`,
+
+  /* MonGame — startervalget. Navn, type, HP og beskrivelse kommer fra
+     spillets data/creatures.json. */
+  monStarters: () => `
+    <div class="demo demo--pick demo--pick-mon">
+      <img class="demo__bg" src="bilder/mon-forest.webp" alt="Skogbakgrunn fra MonGame" loading="lazy">
+      <div class="demo__vignette"></div>
+      <p class="pick__heading">Velg din første skapning</p>
+      <div class="picker">
+        ${[
+          ['mon-sprigle.webp',  'Sprigle', 'Grass', 'grass', 51, 'Et rolig gressfawn.<br>Trygt og lojalt.'],
+          ['mon-cindcub.webp',  'Cindcub', 'Fire',  'fire',  41, 'En liten ildunge.<br>Modig og rask.'],
+          ['mon-bublet.webp',   'Bublet',  'Water', 'water', 55, 'En boblete rumpetroll.<br>Stø og seig.'],
+        ].map(([img, name, type, cls, hp, text]) => `
+          <div class="pick">
+            <img class="pick__art pick__art--px" src="bilder/${img}" alt="${esc(name)}" loading="lazy">
+            <b class="pick__name">${esc(name)}</b>
+            <span class="type type--${cls}">${esc(type)}</span>
+            <span class="pick__hp">${hp} HP</span>
+            <em class="pick__text">${text}</em>
+          </div>`).join('')}
+      </div>
+    </div>`,
+
   /* MonGame — kampscene med to av spillets egne skapninger. */
   mon: () => `
     <div class="demo demo--mon">
@@ -119,17 +164,19 @@ const DEMOS = {
     </div>`,
 };
 
-function posterHTML(project, { lazy = true } = {}) {
-  const media = project.media || {};
+/* Ett galleribilde — enten en levende scene eller et skjermbilde. */
+function mediaHTML(item, project, { lazy = true } = {}) {
+  if (!item) return `<span class="card__glyph" aria-hidden="true">${esc(project.glyph || '◆')}</span>`;
+  if (item.type === 'demo') return DEMOS[item.id] ? DEMOS[item.id]() : '';
 
-  if (media.type === 'demo' && DEMOS[media.id]) return DEMOS[media.id]();
+  return `<img class="card__img" src="${esc(item.src)}"
+               alt="${esc(item.caption || `Skjermbilde fra ${project.title}`)}"
+               ${lazy ? 'loading="lazy"' : ''}>`;
+}
 
-  if (media.type === 'image') {
-    return `<img class="card__img" src="${esc(media.src)}" alt="Skjermbilde fra ${esc(project.title)}"
-                 ${lazy ? 'loading="lazy"' : ''}>`;
-  }
-
-  return `<span class="card__glyph" aria-hidden="true">${esc(project.glyph || '◆')}</span>`;
+/* Kortet i rutenettet viser første element i galleriet. */
+function posterHTML(project, opts) {
+  return mediaHTML(project.gallery?.[0], project, opts);
 }
 
 /* ---------------------------------------------------------
@@ -231,8 +278,171 @@ const sheet = {
   openId: null,
 };
 
+/* ---------------------------------------------------------
+   Galleri — vannrett karusell med snapping, piler og prikker
+   --------------------------------------------------------- */
+function galleryHTML(project) {
+  const items = project.gallery || [];
+  const isDemo = items[0]?.type === 'demo';
+
+  // Første bilde lastes med én gang, resten når man blar dit
+  const slides = items.map((item, i) => `
+    <div class="gallery__slide" role="group" aria-roledescription="bilde"
+         aria-label="${i + 1} av ${items.length}">
+      ${mediaHTML(item, project, { lazy: i > 0 })}
+    </div>`).join('');
+
+  if (items.length < 2) {
+    return `<div class="detail__poster ${isDemo ? 'detail__poster--demo' : ''}">
+              ${mediaHTML(items[0], project, { lazy: false })}
+            </div>`;
+  }
+
+  const dots = items.map((_, i) => `
+    <button class="gallery__dot" type="button" data-go="${i}"
+            aria-label="Gå til bilde ${i + 1}" ${i === 0 ? 'aria-current="true"' : ''}></button>`).join('');
+
+  const arrow = (dir, label, path) => `
+    <button class="gallery__arrow gallery__arrow--${dir}" type="button" data-step="${dir === 'prev' ? -1 : 1}"
+            aria-label="${label}">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="${path}" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>`;
+
+  return `
+    <div class="gallery ${isDemo ? 'gallery--demo' : ''}" data-count="${items.length}">
+      <div class="gallery__track" tabindex="0" aria-label="Bilder fra ${esc(project.title)}">${slides}</div>
+      ${arrow('prev', 'Forrige bilde', 'M14.5 5.5 8 12l6.5 6.5')}
+      ${arrow('next', 'Neste bilde', 'M9.5 5.5 16 12l-6.5 6.5')}
+      <div class="gallery__counter"><span data-current>1</span>/${items.length}</div>
+    </div>
+    <div class="gallery__bar">
+      <p class="gallery__caption" data-caption>${esc(items[0].caption || '')}</p>
+      <div class="gallery__dots">${dots}</div>
+    </div>`;
+}
+
+function initGallery(root) {
+  const gallery = $('.gallery', root);
+  if (!gallery) return;
+
+  const track = $('.gallery__track', gallery);
+  const dots = $$('.gallery__dot', root);
+  const caption = $('[data-caption]', root);
+  const counter = $('[data-current]', gallery);
+  let index = 0;
+
+  const sync = () => {
+    const i = Math.round(track.scrollLeft / track.clientWidth);
+    if (i === index || Number.isNaN(i)) return;
+    index = i;
+
+    dots.forEach((d, n) => d.toggleAttribute('aria-current', n === i));
+    if (counter) counter.textContent = String(i + 1);
+    if (caption) {
+      caption.style.opacity = '0';
+      setTimeout(() => {
+        caption.textContent = galleryCaptions[i] || '';
+        caption.style.opacity = '';
+      }, 140);
+    }
+    gallery.classList.toggle('is-first', i === 0);
+    gallery.classList.toggle('is-last', i === dots.length - 1);
+  };
+
+  const go = (i) => {
+    const clamped = Math.max(0, Math.min(dots.length - 1, i));
+    track.scrollTo({ left: clamped * track.clientWidth, behavior: 'smooth' });
+  };
+
+  track.addEventListener('scroll', () => {
+    clearTimeout(track._t);
+    track._t = setTimeout(sync, 60);
+  }, { passive: true });
+
+  gallery.addEventListener('click', (e) => {
+    const step = e.target.closest('[data-step]');
+    if (step) go(index + Number(step.dataset.step));
+  });
+
+  root.addEventListener('click', (e) => {
+    const dot = e.target.closest('[data-go]');
+    if (dot) go(Number(dot.dataset.go));
+  });
+
+  track.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(index + 1); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); go(index - 1); }
+  });
+
+  gallery.classList.add('is-first');
+  if (dots.length === 1) gallery.classList.add('is-last');
+}
+
+/* ---------------------------------------------------------
+   Levende innebygging — den ekte siden i en nettleserramme.
+   Lastes først når man trykker, så en 21 MB spillbygg ikke drar
+   ned detaljvisningen for alle som bare vil lese.
+   --------------------------------------------------------- */
+function liveHTML(project) {
+  const live = project.live;
+  if (!live) return '';
+
+  const poster = live.poster
+    ? `<img class="live__poster" src="${esc(live.poster)}" alt="" loading="lazy">`
+    : '';
+
+  return `
+    <section class="live" data-src="${esc(live.src)}" data-title="${esc(project.title)}">
+      <header class="live__head">
+        <h3>${esc(live.heading || 'Prøv den selv')}</h3>
+        <a class="live__out" href="${esc(live.src)}" target="_blank" rel="noopener">
+          Åpne i egen fane <span aria-hidden="true">↗</span>
+        </a>
+      </header>
+
+      <div class="live__frame">
+        <div class="live__bar">
+          <span class="live__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="live__url">${esc(live.label || project.title)}</span>
+        </div>
+
+        <div class="live__stage">
+          ${poster}
+          <button class="live__start" type="button">
+            <span class="live__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 5.5 18.5 12 8 18.5Z"/></svg>
+            </span>
+            <span class="live__label">${esc(live.cta || 'Start siden')}</span>
+            <span class="live__hint">${esc(live.hint || '')}</span>
+          </button>
+        </div>
+      </div>
+    </section>`;
+}
+
+function initLive(root) {
+  const live = $('.live', root);
+  if (!live) return;
+
+  $('.live__start', live)?.addEventListener('click', () => {
+    const stage = $('.live__stage', live);
+    const frame = document.createElement('iframe');
+    frame.className = 'live__iframe';
+    frame.src = live.dataset.src;
+    frame.title = `${live.dataset.title} — kjørende`;
+    // Nok rettigheter til at siden virker, men ingen tilgang til denne siden
+    frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups');
+    stage.replaceChildren(frame);
+    live.classList.add('is-running');
+    frame.addEventListener('load', () => frame.focus(), { once: true });
+  });
+}
+
+/* Bildetekstene for galleriet som er åpent nå */
+let galleryCaptions = [];
+
 function detailHTML(project) {
-  const poster = posterHTML(project, { lazy: false });
+  galleryCaptions = (project.gallery || []).map((g) => g.caption || '');
 
   const meta = [
     ['År', project.year],
@@ -264,7 +474,7 @@ function detailHTML(project) {
     : '';
 
   return `
-    <div class="detail__poster" style="background:${gradient(project.accent)}">${poster}</div>
+    ${galleryHTML(project)}
     <div class="detail__body">
       <p class="detail__kicker">${esc(project.tagline)}</p>
       <h2 class="detail__title" id="sheetTitle">${esc(project.title)}</h2>
@@ -272,6 +482,7 @@ function detailHTML(project) {
       <dl class="detail__meta">${meta}</dl>
       ${body}
       ${highlights}
+      ${liveHTML(project)}
       ${actions ? `<div class="detail__actions">${actions}</div>` : ''}
       ${note}
     </div>`;
@@ -283,6 +494,8 @@ function openSheet(project) {
 
   sheet.scroll.innerHTML = detailHTML(project);
   sheet.scroll.scrollTop = 0;
+  initGallery(sheet.scroll);
+  initLive(sheet.scroll);
 
   sheet.el.hidden = false;
   sheet.backdrop.hidden = false;

@@ -27,8 +27,8 @@
   --r-lg:  22px;
   --r-xl:  28px;
 
-  --pad:   clamp(20px, 5vw, 40px);
-  --maxw:  1180px;
+  --pad:   clamp(20px, 4vw, 56px);
+  --maxw:  1520px;
 
   /* Apples typiske ease — rolig start, mykt stopp */
   --ease:   cubic-bezier(0.28, 0.11, 0.32, 1);
@@ -128,7 +128,8 @@ button {
   margin-inline: auto;
   padding-inline: var(--pad);
 }
-.wrap--narrow { max-width: 760px; }
+/* Løpende tekst skal ikke følge den brede rammen — lange linjer er tunge å lese */
+.wrap--narrow { max-width: 820px; }
 .center { text-align: center; }
 
 .skip-link {
@@ -271,8 +272,8 @@ button {
 
 .hero__title {
   position: relative;
-  font-size: clamp(2.6rem, 7.2vw, 5.1rem);
-  max-width: 15ch;
+  font-size: clamp(2.6rem, 7.2vw, 5.9rem);
+  max-width: 17ch;
   margin-inline: auto;
   letter-spacing: -0.035em;
 }
@@ -383,7 +384,9 @@ button {
 /* ---------- Prosjektrutenett ---------- */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* 340px som minstemål gir tre romslige kolonner på full bredde i stedet
+     for fire trange — mer plass per prosjekt, ikke flere kort per rad */
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   /* dense lar smale kort etterfylle hullene brede kort etterlater */
   grid-auto-flow: row dense;
   /* start, ikke stretch: et kort skal ha sin egen høyde, ikke arve
@@ -583,7 +586,7 @@ button {
   /* Desktop: sentrert kort */
   top: 50%;
   left: 50%;
-  width: min(760px, calc(100vw - 48px));
+  width: min(900px, calc(100vw - 64px));
   max-height: min(86vh, 880px);
   border-radius: var(--r-xl);
   transform: translate(-50%, -46%) scale(0.94);
@@ -1019,6 +1022,330 @@ button {
 /* På smale kort blir korthånden og småteksten uleselig — rydd bort detaljene */
 @container (max-width: 340px) {
   .hand, .energy, .monbox { display: none; }
+}
+
+/* =========================================================
+   Galleri — vannrett karusell i detaljvisningen
+   ========================================================= */
+.gallery {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--bg-sunken);
+  overflow: hidden;
+}
+.gallery--demo { aspect-ratio: 2 / 1; }
+
+.gallery__track {
+  display: flex;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+.gallery__track::-webkit-scrollbar { display: none; }
+.gallery__track:focus-visible { outline-offset: -4px; }
+
+.gallery__slide {
+  position: relative;
+  flex: 0 0 100%;
+  height: 100%;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+.gallery__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin-top: -19px;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  transition: opacity 0.25s var(--ease), background-color 0.2s var(--ease),
+              transform 0.25s var(--spring);
+}
+.gallery:hover .gallery__arrow,
+.gallery__arrow:focus-visible { opacity: 1; }
+.gallery__arrow:hover { background: rgba(0, 0, 0, 0.58); transform: scale(1.08); }
+.gallery__arrow svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2; }
+.gallery__arrow--prev { left: 14px; }
+.gallery__arrow--next { right: 14px; }
+/* Ingen pil å trykke på når du står ytterst */
+.gallery.is-first .gallery__arrow--prev,
+.gallery.is-last  .gallery__arrow--next { opacity: 0 !important; pointer-events: none; }
+
+.gallery__counter {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 3;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.gallery__bar {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px clamp(22px, 4vw, 40px) 0;
+}
+
+.gallery__caption {
+  flex: 1;
+  min-width: 0;
+  color: var(--text-2);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  transition: opacity 0.14s var(--ease);
+}
+
+.gallery__dots {
+  display: flex;
+  gap: 7px;
+  flex-shrink: 0;
+}
+.gallery__dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--fill-strong);
+  transition: background-color 0.25s var(--ease), transform 0.25s var(--spring);
+}
+.gallery__dot:hover { transform: scale(1.3); }
+.gallery__dot[aria-current] { background: var(--text-2); transform: scale(1.15); }
+
+@media (max-width: 700px) {
+  .gallery__arrow { display: none; }
+  .gallery__bar { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .gallery__dots { align-self: center; }
+}
+
+/* =========================================================
+   Levende innebygging — den ekte siden i en nettleserramme
+   ========================================================= */
+.live { margin-top: 34px; }
+
+.live__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  /* lukkeknappen ligger fast oppe til høyre og flyter over innholdet
+     når man scroller — hold lenken klar av den */
+  padding-right: 46px;
+  margin-bottom: 14px;
+}
+.live__head h3 { margin: 0; font-size: 1.05rem; letter-spacing: -0.015em; }
+.live__out { font-size: 0.88rem; font-weight: 500; white-space: nowrap; }
+
+.live__frame {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--bg-sunken);
+  box-shadow: var(--shadow-sm), inset 0 0 0 1px var(--sep-soft);
+}
+
+/* Nettleserlinje, så det er tydelig at dette er en ekte side */
+.live__bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 14px;
+  background: var(--bg-elev);
+  border-bottom: 1px solid var(--sep-soft);
+}
+.section--alt .live__bar { background: var(--bg); }
+
+.live__dots { display: flex; gap: 6px; }
+.live__dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--fill-strong);
+}
+
+.live__url {
+  flex: 1;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--fill);
+  color: var(--text-3);
+  font-size: 12px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.live__stage {
+  position: relative;
+  height: min(72vh, 640px);
+  background: #0c0c0d;
+}
+
+.live__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: brightness(0.5) saturate(0.85);
+}
+
+.live__start {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #fff;
+  text-align: center;
+}
+.live__icon {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32);
+  transition: transform 0.3s var(--spring), background-color 0.25s var(--ease);
+}
+.live__icon svg { width: 26px; height: 26px; fill: currentColor; margin-left: 3px; }
+.live__start:hover .live__icon { transform: scale(1.09); background: rgba(255, 255, 255, 0.26); }
+
+.live__label { font-size: 1.02rem; font-weight: 600; letter-spacing: -0.015em; }
+.live__hint {
+  max-width: 34ch;
+  font-size: 0.84rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.7);
+}
+.live__hint:empty { display: none; }
+
+.live__iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  background: #fff;
+}
+
+/* Når siden kjører skal den få mest mulig plass */
+.live.is-running .live__stage { height: min(78vh, 760px); }
+
+@media (max-width: 700px) {
+  .live__stage { height: min(64vh, 520px); }
+  .live.is-running .live__stage { height: min(70vh, 600px); }
+  .live__head { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
+/* =========================================================
+   Valgskjermer i spilldemoene (klasse- og startervalg)
+   ========================================================= */
+.pick__heading {
+  position: absolute;
+  top: 7cqh;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  font-size: 4cqmin;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-shadow: 0 0.4cqmin 1.2cqmin rgba(0, 0, 0, 0.9);
+}
+
+.picker {
+  position: absolute;
+  left: 50%;
+  bottom: 7cqh;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5cqmin;
+}
+
+.pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5cqh;
+  width: 26cqmin;
+  padding: 1.6cqmin 1.4cqmin 1.8cqmin;
+  border-radius: 1.6cqmin;
+  background: rgba(12, 12, 16, 0.62);
+  box-shadow: inset 0 0 0 0.3cqmin rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #f2f2f5;
+  text-align: center;
+}
+/* Den midterste er markert som valgt */
+.pick--on {
+  background: rgba(24, 22, 34, 0.78);
+  box-shadow: inset 0 0 0 0.4cqmin rgba(255, 190, 80, 0.75),
+              0 0 4cqh rgba(255, 170, 60, 0.28);
+  transform: translateY(-2cqh);
+}
+
+.pick__art {
+  height: 30cqh;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 1.5cqh 1.5cqh rgba(0, 0, 0, 0.6));
+}
+.pick__art--px { image-rendering: pixelated; height: 22cqh; }
+
+.pick__name { font-size: 3.1cqmin; font-weight: 600; letter-spacing: -0.01em; }
+.pick__hp   { font-size: 2.5cqmin; color: rgba(255, 255, 255, 0.62); font-variant-numeric: tabular-nums; }
+.pick__text {
+  font-style: normal;
+  font-size: 2.2cqmin;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.type {
+  padding: 0.4cqmin 1.4cqmin;
+  border-radius: 999px;
+  font-size: 2.1cqmin;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #16160f;
+}
+.type--grass { background: #7ed957; }
+.type--fire  { background: #ff8a4c; }
+.type--water { background: #56c2ff; }
+
+/* Trange kort: bare navn og bilde får plass */
+@container (max-width: 340px) {
+  .pick__text, .pick__hp, .pick__heading { display: none; }
+  .pick { width: 28cqmin; }
 }
 
 /* ---------- Innfelling ved scroll ---------- */

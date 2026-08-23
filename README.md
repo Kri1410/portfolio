@@ -30,7 +30,17 @@ røre HTML-en for å legge til et prosjekt — bare legg til et nytt objekt i
   "year": "2026",
   "role": "Design og utvikling",
   "accent": ["#0A84FF", "#5E5CE6"],  // gradient som vises mens bildet laster
-  "media": { "type": "image", "src": "bilder/skjermbilde.webp" },
+  "gallery": [                       // bildene man blar gjennom
+    { "type": "image", "src": "bilder/skjermbilde.webp", "caption": "Forsiden." }
+  ],
+  "live": {                          // valgfritt: den kjørende siden
+    "src": "sider/dittprosjekt/",
+    "label": "dittprosjekt.no",
+    "heading": "Bla gjennom siden",
+    "cta": "Åpne siden",
+    "hint": "Kort forklaring på hva man kan gjøre.",
+    "poster": "bilder/skjermbilde.webp"
+  },
   "tech": ["Next.js", "TypeScript"],
   "private": false,             // true gir "Privat repo"-merke og skjuler lenken
   "links": {
@@ -46,17 +56,39 @@ røre HTML-en for å legge til et prosjekt — bare legg til et nytt objekt i
 Feltene `demo`, `repo` og `highlights` kan utelates.
 Bruk `` `backticks` `` i `description` og `highlights` for å få kodeformatering.
 
-### Forhåndsvisningen (`media`)
+### Galleriet (`gallery`)
 
-Hvert prosjekt har ett av to:
+`gallery` er en liste med det man blar gjennom i detaljvisningen. **Det første
+elementet er også bildet på kortet i rutenettet.** Hvert element er ett av to:
 
 | | |
 |---|---|
-| `{ "type": "image", "src": "bilder/x.webp" }` | Et ekte skjermbilde. Brukes for web-prosjektene. |
-| `{ "type": "demo", "id": "spire" }` | En levende scene. Brukes for spillene. |
+| `{ "type": "image", "src": "bilder/x.webp", "caption": "…" }` | Et ekte skjermbilde. |
+| `{ "type": "demo", "id": "spire", "caption": "…" }` | En levende scene. Brukes for spillene. |
 
-Utelater du `media` faller kortet tilbake på gradienten fra `accent` med
-tegnet fra `glyph` oppå.
+Har et prosjekt bare ett element, faller galleriet tilbake til et enkelt bilde
+uten piler og prikker.
+
+### Den kjørende siden (`live`)
+
+`live` legger inn prosjektet som det faktisk er — i en nettleserramme nederst i
+detaljvisningen, der man kan scrolle, klikke og bruke det. Siden lastes først
+når man trykker på knappen, så en tung side ikke drar ned resten.
+
+Slik legger du inn et nytt prosjekt som kjørende side:
+
+1. Legg de ferdige filene i `sider/dittprosjekt/`. Siden **må bruke relative
+   stier** (`css/style.css`, ikke `/css/style.css`), ellers brekker den når den
+   ligger i en undermappe.
+2. Legg til `live`-blokken over i prosjektet i `projects.json`.
+
+Bygger du med Next.js må du sette `basePath` til stien siden skal ligge på,
+og huske at filer fra `public/` ikke får `basePath` automatisk — se hvordan
+`sider/cv/` er satt opp.
+
+Ligger prosjektet allerede på nett kan `src` like gjerne være en full URL —
+men mange sider nekter å bli vist i ramme (`X-Frame-Options`), så en lokal
+kopi er som regel tryggere.
 
 **Demoene** er ikke videoer eller GIF-er, men HTML og CSS bygget av spillenes
 egne grafikkressurser: bakgrunnen, sprite-stripene og de faktiske tallene fra
@@ -96,11 +128,18 @@ Filen `.nojekyll` er med for å hindre at GitHub Pages kjører innholdet gjennom
 ```
 index.html          Markup og seksjoner
 css/style.css       Designsystem (fargetokens, komponenter, mørk modus, demoer)
-js/app.js           Datalasting, filtre, detaljvisning, tema, demoer
+js/app.js           Datalasting, filtre, galleri, detaljvisning, tema, demoer
 data/projects.json  Alt innhold
-bilder/             Skjermbilder og grafikkressurser (webp, ~640 kB totalt)
+bilder/             Skjermbilder og grafikkressurser (webp)
+sider/              Kjørende kopier av prosjektene, vist i ramme
+robots.txt          Holder sider/ ute av søkemotorer
 server.mjs          Statisk dev-server
 ```
+
+> `sider/cv/` er bygget med `basePath: /portfolio/sider/cv`, så den ser riktig
+> ut på GitHub Pages, men ustilt hvis du åpner porteføljen på en annen sti.
+> For å teste den lokalt: kjør serveren fra mappa **over** porteføljen og gå
+> til `http://localhost:4321/portfolio/`.
 
 ### Om bildene
 

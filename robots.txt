@@ -1,0 +1,8 @@
+# Porteføljen selv skal kunne finnes.
+User-agent: *
+Allow: /
+
+# De innebygde kopiene av prosjektene skal ikke indekseres — de er der for
+# å kunne prøves inne i porteføljen, ikke for å konkurrere med originalene
+# i søkeresultater.
+Disallow: /sider/
