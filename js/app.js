@@ -68,12 +68,75 @@ function staggerReveals(elements) {
 }
 
 /* ---------------------------------------------------------
+   Forhåndsvisninger
+   Web-prosjekter viser ekte skjermbilder. Spillene viser en levende
+   scene bygget av spillenes egne grafikkressurser — bakgrunn, sprite-
+   striper animert med steps(), og ekte tall fra spilldataene.
+   --------------------------------------------------------- */
+const DEMOS = {
+  /* SpireSlayer — kampscene: The Ronin (75 HP) mot bossen NightBorne (300 HP),
+     med startkortstokkens faktiske kort. */
+  spire: () => `
+    <div class="demo demo--spire">
+      <img class="demo__bg" src="bilder/spire-arena.webp" alt="Kamparenaen i SpireSlayer" loading="lazy">
+      <div class="demo__vignette"></div>
+      <div class="spr spr--ronin" style="--f:6;--d:1.1s"></div>
+      <div class="spr spr--nb" style="--f:6;--d:.95s"></div>
+      <div class="hpbar hpbar--left">
+        <span class="hpbar__name">The Ronin</span>
+        <span class="hpbar__track"><i style="--p:72%"></i></span>
+        <span class="hpbar__num">54/75</span>
+      </div>
+      <div class="hpbar hpbar--right">
+        <span class="hpbar__name">NightBorne</span>
+        <span class="hpbar__track hpbar__track--foe"><i style="--p:61%"></i></span>
+        <span class="hpbar__num">183/300</span>
+      </div>
+      <div class="energy"><b>3</b><span>/3</span></div>
+      <div class="hand">
+        <div class="gcard gcard--atk"><i class="gcard__cost">1</i><b>Strike</b><em>Deal 6 damage.</em></div>
+        <div class="gcard gcard--def"><i class="gcard__cost">1</i><b>Defend</b><em>Gain 5 Block.</em></div>
+        <div class="gcard gcard--atk"><i class="gcard__cost">2</i><b>Bash</b><em>Deal 8 damage. Apply 2 Vulnerable.</em></div>
+      </div>
+    </div>`,
+
+  /* MonGame — kampscene med to av spillets egne skapninger. */
+  mon: () => `
+    <div class="demo demo--mon">
+      <img class="demo__bg" src="bilder/mon-meadow.webp" alt="Kampbakgrunn fra MonGame" loading="lazy">
+      <img class="mon mon--foe" src="bilder/mon-embercat.webp" alt="Skapningen Embercat" loading="lazy">
+      <img class="mon mon--own" src="bilder/mon-bublet.webp" alt="Skapningen Bublet" loading="lazy">
+      <div class="monhp monhp--foe">
+        <span class="monhp__row"><b>Embercat</b><span>Lv 12</span></span>
+        <span class="monhp__track"><i style="--p:46%"></i></span>
+      </div>
+      <div class="monhp monhp--own">
+        <span class="monhp__row"><b>Bublet</b><span>Lv 14</span></span>
+        <span class="monhp__track"><i style="--p:78%"></i></span>
+        <span class="monhp__num">39/50</span>
+      </div>
+      <div class="monbox">Hva skal <b>Bublet</b> gjøre?</div>
+    </div>`,
+};
+
+function posterHTML(project, { lazy = true } = {}) {
+  const media = project.media || {};
+
+  if (media.type === 'demo' && DEMOS[media.id]) return DEMOS[media.id]();
+
+  if (media.type === 'image') {
+    return `<img class="card__img" src="${esc(media.src)}" alt="Skjermbilde fra ${esc(project.title)}"
+                 ${lazy ? 'loading="lazy"' : ''}>`;
+  }
+
+  return `<span class="card__glyph" aria-hidden="true">${esc(project.glyph || '◆')}</span>`;
+}
+
+/* ---------------------------------------------------------
    Kort
    --------------------------------------------------------- */
 function cardHTML(project) {
-  const poster = project.image
-    ? `<img class="card__img" src="${esc(project.image)}" alt="" loading="lazy">`
-    : `<span class="card__glyph" aria-hidden="true">${esc(project.glyph || '◆')}</span>`;
+  const poster = posterHTML(project);
 
   const badge = project.private
     ? '<span class="card__badge">Privat repo</span>'
@@ -169,9 +232,7 @@ const sheet = {
 };
 
 function detailHTML(project) {
-  const poster = project.image
-    ? `<img class="card__img" src="${esc(project.image)}" alt="">`
-    : `<span class="card__glyph" aria-hidden="true">${esc(project.glyph || '◆')}</span>`;
+  const poster = posterHTML(project, { lazy: false });
 
   const meta = [
     ['År', project.year],

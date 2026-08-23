@@ -386,6 +386,9 @@ button {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   /* dense lar smale kort etterfylle hullene brede kort etterlater */
   grid-auto-flow: row dense;
+  /* start, ikke stretch: et kort skal ha sin egen høyde, ikke arve
+     høyden fra det høyeste kortet i raden og få dødt rom under teksten */
+  align-items: start;
   gap: 22px;
 }
 
@@ -413,8 +416,10 @@ button {
 /* Fremhevet prosjekt tar to kolonner der det er plass */
 @media (min-width: 900px) {
   .card--featured { grid-column: span 2; }
-  .card--featured .card__poster { aspect-ratio: 21 / 9; }
   .card--featured .card__title { font-size: 1.6rem; }
+  /* Spillscenene er komponert for et bredt format. Skjermbilder beholder
+     16:10 slik at ingenting blir beskåret. */
+  .card--featured .card__poster:has(.demo) { aspect-ratio: 21 / 9; }
 }
 
 .card__poster {
@@ -424,7 +429,9 @@ button {
   place-items: center;
   overflow: hidden;
 }
-.card__poster::after {
+/* Glansen hører til gradient-plassholderen — den skal ikke ligge over
+   ekte skjermbilder eller spillscener. */
+.card__poster:has(.card__glyph)::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -615,10 +622,13 @@ button {
 
 .detail__poster {
   position: relative;
-  aspect-ratio: 21 / 9;
+  aspect-ratio: 16 / 10;
   display: grid;
   place-items: center;
+  overflow: hidden;
 }
+/* Spillscenene er komponert bredt og trenger ikke like høy boks */
+.detail__poster:has(.demo) { aspect-ratio: 2 / 1; }
 .detail__poster .card__glyph { font-size: clamp(4rem, 12vw, 6.6rem); }
 
 .detail__body { padding: 30px clamp(22px, 4vw, 40px) 40px; }
@@ -744,6 +754,271 @@ button {
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.6);
   }
+}
+
+/* =========================================================
+   Levende forhåndsvisninger av spillene
+   Scenene er bygget av spillenes egne grafikkressurser. Alt måles i
+   container-enheter, så den samme markupen skalerer riktig både i
+   kortet (16:10) og i detaljvisningen (21:9).
+   ========================================================= */
+.demo {
+  position: absolute;
+  inset: 0;
+  container-type: size;
+  overflow: hidden;
+  background: #0a0a0c;
+}
+
+.demo__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.demo__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 50% 42%, transparent 40%, rgba(0, 0, 0, 0.55) 100%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0%, transparent 22%);
+}
+
+/* Sprite-striper: én rad med rammer, framdrevet med steps().
+   --f = antall rammer, --d = varighet på loopen. */
+.spr {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: calc(var(--f) * 100%) 100%;
+  animation: sprite-step var(--d) steps(var(--f)) infinite;
+  filter: drop-shadow(0 2cqh 2cqh rgba(0, 0, 0, 0.55));
+}
+@keyframes sprite-step {
+  from { background-position-x: 0%; }
+  to   { background-position-x: 100%; }
+}
+
+/* ---------- SpireSlayer ---------- */
+.spr--ronin {
+  height: 52cqh;
+  aspect-ratio: 240 / 337;
+  left: 11%;
+  bottom: 7%;
+  background-image: url("../bilder/spire-ronin-idle.webp");
+}
+/* Bossen er 37x30 pikselkunst — skaleres opp hardt, så pixelated er et krav */
+.spr--nb {
+  height: 34cqh;
+  aspect-ratio: 37 / 30;
+  right: 9%;
+  bottom: 12%;
+  background-image: url("../bilder/spire-nightborne.webp");
+  image-rendering: pixelated;
+}
+
+.hpbar {
+  position: absolute;
+  top: 6cqh;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6cqh;
+  width: 26cqmin;
+  font-size: 3.1cqmin;
+  color: #fff;
+  text-shadow: 0 0.3cqmin 0.8cqmin rgba(0, 0, 0, 0.9);
+}
+.hpbar--left  { left: 5%; }
+.hpbar--right { right: 5%; align-items: flex-end; }
+
+/* I detaljvisningen sitter lukkeknappen oppe til høyre — hold navnet klar av den */
+.detail__poster .hpbar--right { right: 12%; }
+
+.hpbar__name { font-weight: 600; letter-spacing: -0.01em; }
+.hpbar__num  { font-size: 2.6cqmin; opacity: 0.85; font-variant-numeric: tabular-nums; }
+
+.hpbar__track {
+  width: 100%;
+  height: 1.9cqh;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  box-shadow: inset 0 0 0 0.35cqmin rgba(255, 255, 255, 0.22);
+  overflow: hidden;
+}
+.hpbar__track i {
+  display: block;
+  width: var(--p);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #34c759, #8ce07a);
+}
+.hpbar__track--foe i { background: linear-gradient(90deg, #ff3b30, #ff7a5c); }
+
+.energy {
+  position: absolute;
+  left: 5%;
+  bottom: 8cqh;
+  display: grid;
+  place-items: center;
+  width: 9cqh;
+  height: 9cqh;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe082, #f5a623 55%, #8a4b12);
+  box-shadow: 0 0 3cqh rgba(245, 166, 35, 0.6), inset 0 0 1cqh rgba(0, 0, 0, 0.35);
+  color: #2b1500;
+  font-size: 3.4cqmin;
+  font-weight: 700;
+  line-height: 1;
+}
+.energy span { font-size: 2.2cqmin; opacity: 0.75; }
+
+.hand {
+  position: absolute;
+  left: 50%;
+  bottom: 3cqh;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.8cqmin;
+}
+
+.gcard {
+  position: relative;
+  width: 21cqmin;
+  padding: 2cqmin 1.6cqmin 1.6cqmin;
+  border-radius: 1.4cqmin;
+  background: linear-gradient(165deg, #2b2b33, #17171c);
+  box-shadow: 0 1cqh 2.5cqh rgba(0, 0, 0, 0.6), inset 0 0 0 0.3cqmin rgba(255, 255, 255, 0.14);
+  color: #f2f2f5;
+  text-align: center;
+  transform-origin: bottom center;
+}
+.gcard:nth-child(1) { transform: rotate(-7deg) translateY(1.4cqh); }
+.gcard:nth-child(2) { transform: rotate(0deg)  translateY(-1cqh); }
+.gcard:nth-child(3) { transform: rotate(7deg)  translateY(1.4cqh); }
+
+.gcard b {
+  display: block;
+  font-size: 3cqmin;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.gcard em {
+  display: block;
+  margin-top: 0.6cqmin;
+  font-style: normal;
+  font-size: 2.2cqmin;
+  line-height: 1.25;
+  color: rgba(255, 255, 255, 0.62);
+}
+.gcard--atk { box-shadow: 0 1cqh 2.5cqh rgba(0,0,0,.6), inset 0 0 0 .3cqmin rgba(255, 90, 70, 0.45); }
+.gcard--def { box-shadow: 0 1cqh 2.5cqh rgba(0,0,0,.6), inset 0 0 0 .3cqmin rgba(80, 160, 255, 0.45); }
+
+.gcard__cost {
+  position: absolute;
+  top: -1.4cqmin;
+  left: -1.4cqmin;
+  display: grid;
+  place-items: center;
+  width: 5cqmin;
+  height: 5cqmin;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe082, #e0921c);
+  color: #2b1500;
+  font-size: 2.6cqmin;
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* ---------- MonGame ---------- */
+.demo--mon .demo__bg { image-rendering: pixelated; }
+
+.mon {
+  position: absolute;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 1.5cqh 1.5cqh rgba(0, 0, 0, 0.45));
+}
+.mon--foe {
+  height: 26cqh;
+  right: 14%;
+  top: 22%;
+  animation: mon-bob 2.6s var(--ease) infinite;
+}
+.mon--own {
+  height: 34cqh;
+  left: 13%;
+  bottom: 16%;
+  animation: mon-bob 3.1s var(--ease) infinite 0.4s;
+}
+@keyframes mon-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-1.8cqh); }
+}
+
+.monhp {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5cqh;
+  width: 32cqmin;
+  padding: 1.4cqmin 1.8cqmin;
+  border-radius: 1.2cqmin;
+  background: rgba(248, 248, 250, 0.94);
+  box-shadow: 0 1cqh 2cqh rgba(0, 0, 0, 0.3), inset 0 0 0 0.3cqmin rgba(0, 0, 0, 0.18);
+  color: #1d1d1f;
+  font-size: 3cqmin;
+}
+.monhp--foe { left: 5%;  top: 9%; }
+.monhp--own { right: 5%; bottom: 9%; }
+
+.monhp__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5cqmin;
+}
+.monhp__row b { font-weight: 600; letter-spacing: -0.01em; }
+.monhp__row span { font-size: 2.5cqmin; color: #6e6e73; }
+
+.monhp__track {
+  height: 1.5cqh;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+}
+.monhp__track i {
+  display: block;
+  width: var(--p);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #34c759, #8ce07a);
+}
+.monhp--foe .monhp__track i { background: linear-gradient(90deg, #ff9f0a, #ffd60a); }
+
+.monhp__num {
+  align-self: flex-end;
+  font-size: 2.4cqmin;
+  color: #6e6e73;
+  font-variant-numeric: tabular-nums;
+}
+
+.monbox {
+  position: absolute;
+  left: 5%;
+  bottom: 6%;
+  width: 42cqmin;
+  padding: 2cqmin 2.4cqmin;
+  border-radius: 1.2cqmin;
+  background: rgba(28, 28, 30, 0.9);
+  box-shadow: inset 0 0 0 0.3cqmin rgba(255, 255, 255, 0.2);
+  color: #f5f5f7;
+  font-size: 3cqmin;
+}
+.monbox b { font-weight: 600; }
+
+/* På smale kort blir korthånden og småteksten uleselig — rydd bort detaljene */
+@container (max-width: 340px) {
+  .hand, .energy, .monbox { display: none; }
 }
 
 /* ---------- Innfelling ved scroll ---------- */

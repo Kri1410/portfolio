@@ -1,25 +1,51 @@
 {
   "profile": {
     "name": "Kristoffer Holmsen",
-    "headline": "Jeg bygger nettsider, apper og spill.",
-    "intro": "Utvikler og designer fra Kristiansand. Jeg jobber i skjæringspunktet mellom kode og design — fra bedriftsnettsider og prototyper til spill i Godot og JavaScript.",
-    "location": "Kristiansand, Norge",
+    "headline": "Jeg bygger nettsider, prototyper og spill.",
+    "intro": "IT-student ved UiA med sterk interesse for brukervennlige digitale løsninger. Jeg kombinerer UI/UX, tjenestedesign og teknisk forståelse — fra bedriftsnettsider og kommunale prototyper til spill i Godot og JavaScript.",
+    "location": "Bø i Telemark",
     "email": "kf.holmsen@gmail.com",
     "github": "https://github.com/Kri1410",
     "about": [
-      "Jeg er student og utvikler med en forkjærlighet for grensesnitt som føles gode å bruke. Mesteparten av det jeg lager starter som en skisse og ender som noe du kan klikke på.",
-      "De siste årene har jeg jobbet med alt fra Next.js og TypeScript til Godot 4 og rå canvas-rendering i JavaScript. Under finner du et utvalg av prosjektene jeg er mest fornøyd med."
+      "Jeg studerer IT ved Universitetet i Agder og jobber i skjæringspunktet mellom kode og design. Mesteparten av det jeg lager starter som en skisse og ender som noe du kan klikke på — eller spille.",
+      "De siste årene har jeg jobbet med alt fra Next.js og TypeScript til Godot 4 og rå canvas-rendering i JavaScript. Under finner du et utvalg av prosjektene jeg er mest fornøyd med. Alle bildene er ekte skjermbilder, og spillene viser en levende forhåndsvisning bygget av spillenes egne grafikkressurser."
     ]
   },
 
   "categories": [
     { "id": "alle", "label": "Alle" },
     { "id": "web", "label": "Web" },
-    { "id": "spill", "label": "Spill" },
-    { "id": "studier", "label": "Studier" }
+    { "id": "spill", "label": "Spill" }
   ],
 
   "projects": [
+    {
+      "id": "spireslayer",
+      "title": "SpireSlayer",
+      "tagline": "Kortbasert roguelike i Godot 4",
+      "category": "spill",
+      "featured": true,
+      "year": "2026",
+      "role": "Design og programmering",
+      "accent": ["#FF375F", "#FF9F0A"],
+      "tech": ["Godot 4", "GDScript"],
+      "private": false,
+      "media": { "type": "demo", "id": "spire" },
+      "links": { "repo": "https://github.com/Kri1410/SpireSlayer" },
+      "summary": "Et kortbasert action-spill der du klatrer oppover et tårn, én etasje og én kortstokk om gangen.",
+      "description": [
+        "SpireSlayer er en roguelike deckbuilder der du klatrer oppover et tårn. Hver etasje gir nye fiender, nye kort og nye valg for hvordan kortstokken din utvikler seg — og et tapt løp betyr at du starter på nytt nederst.",
+        "Kjernen i prosjektet er kortmotoren. Kort, effekter og fiender er definert som Godot-ressurser i `data/`, ikke som kode, så nytt innhold kan legges til uten å skrive ny logikk. Et kort som `Bash` er bare data: 2 i energi, 8 skade, 2 Vulnerable.",
+        "Tre spillbare klasser deler samme kampsystem, men har hver sin startkortstokk og relikvie: The Ronin (75 HP, presise enkeltmål), The Yumi (65 HP, avstand og korttrekk) og Soul Reaper (90 HP, tunge slag og forsvar).",
+        "Rundt 176 000 linjer GDScript, og det største jeg har bygget i Godot."
+      ],
+      "highlights": [
+        "Datadrevet kortmotor — kort og fiender defineres som ressurser, ikke kode",
+        "Tre spillbare klasser med egne kortstokker og relikvier",
+        "Turbasert kamp med energi, block og statuseffekter",
+        "Prosedyregenerert tårnprogresjon med bosskamper"
+      ]
+    },
     {
       "id": "mon",
       "title": "MonGame",
@@ -28,49 +54,51 @@
       "featured": true,
       "year": "2026",
       "role": "Design og programmering",
-      "glyph": "◈",
-      "accent": ["#5E5CE6", "#0A84FF"],
-      "tech": ["Godot 4", "GDScript", "PowerShell"],
+      "accent": ["#30D158", "#0A84FF"],
+      "tech": ["Godot 4", "GDScript"],
       "private": true,
+      "media": { "type": "demo", "id": "mon" },
       "links": {},
-      "summary": "Et originalt 2D top-down creature-collector-spill med byer, ruter, party-system, kamper og lagring.",
+      "summary": "Et 2D top-down creature-collector-spill med egne skapninger, byer, ruter, kamper og lagring.",
       "description": [
-        "MonGame er et fullstendig 2D top-down rollespill bygget fra bunnen i Godot 4. Spilleren starter på en tittelskjerm, velger en starter og utforsker et sammenhengende kart med ruter og byer.",
-        "Systemene som er på plass inkluderer turbasert kamp, party- og bag-håndtering, dialog med NPC-er, samt lagring og lasting av spilltilstand. Hele grensesnittet er navigerbart både med mus og tastatur (WASD/piltaster), noe som krevde et eget input-lag over Godots standardoppsett.",
-        "Prosjektet er det største jeg har bygget i Godot, med rundt 125 000 linjer GDScript, og har vært en øvelse i å holde en voksende kodebase strukturert."
+        "MonGame er et top-down rollespill bygget fra bunnen i Godot 4. Spilleren velger en starter, utforsker et sammenhengende kart med ruter og byer, og fanger og trener skapninger underveis.",
+        "Skapningene er originale — Bublet, Embercat, Sprigle, Blazehound og resten er tegnet for prosjektet, fordelt på egne typer som fire, water, grass, gale, spark og stone.",
+        "Systemene som er på plass inkluderer turbasert kamp, party- og bag-håndtering, dialog med NPC-er, og lagring og lasting av full spilltilstand. Hele grensesnittet er navigerbart både med mus og tastatur, noe som krevde et eget input-lag over Godots standardoppsett.",
+        "Rundt 125 000 linjer GDScript. Kartene er definert som tekstfiler i `maps/`, så en ny by er en ny fil — ikke ny kode."
       ],
       "highlights": [
+        "Originale skapninger fordelt på seks egne typer",
         "Turbasert kampsystem med party- og bag-håndtering",
         "Save/load av full spilltilstand",
-        "Fullt mus- og tastaturnavigerbare menyer",
-        "Sammenhengende verdenskart med byer og ruter"
+        "Kart som redigerbare tekstfiler",
+        "Fullt mus- og tastaturnavigerbare menyer"
       ]
     },
     {
-      "id": "spireslayer",
-      "title": "SpireSlayer",
-      "tagline": "Kortbasert roguelike",
+      "id": "soulsking",
+      "title": "Souls King",
+      "tagline": "Presisjonsplattformer i nettleseren",
       "category": "spill",
       "featured": true,
       "year": "2026",
       "role": "Design og programmering",
-      "glyph": "♠",
-      "accent": ["#FF375F", "#FF9F0A"],
-      "tech": ["Godot 4", "GDScript"],
+      "accent": ["#5E5CE6", "#BF5AF2"],
+      "tech": ["JavaScript", "Canvas", "Node.js"],
       "private": false,
-      "links": {
-        "repo": "https://github.com/Kri1410/SpireSlayer"
-      },
-      "summary": "Et kortbasert action-spill der du klatrer oppover et tårn, én etasje og én kortstokk om gangen.",
+      "media": { "type": "image", "src": "bilder/soulsking.webp" },
+      "links": { "repo": "https://github.com/Kri1410/jumpKing" },
+      "summary": "Jump King møter Dark Souls: uavbrytbare hopp, bålplass-checkpoints og bosskamper — alt i ren JavaScript.",
       "description": [
-        "SpireSlayer er et roguelike deckbuilder-spill inspirert av sjangeren rundt Slay the Spire. Du klatrer oppover et tårn hvor hver etasje gir nye fiender, nye kort og nye valg for hvordan kortstokken din utvikler seg.",
-        "Kjernen i prosjektet er kortmotoren: et system for å definere kort, effekter og kombinasjoner som data, slik at nytt innhold kan legges til uten å skrive ny logikk hver gang.",
-        "Bygget i Godot 4 med rundt 176 000 linjer GDScript."
+        "Souls King startet som en Jump King-prototype og vokste til noe eget: et presisjonsplattformspill med Souls-mekanikker. Hoppet lades opp og kan ikke avbrytes, så én feilberegning sender deg flere skjermer ned.",
+        "Bålplasser fungerer som checkpoints og helbreder deg, og verden er delt i navngitte områder du klatrer gjennom — Forest route, Glowing depths, Crumbling heights og Ancient gateway — før den siste bosskampen.",
+        "Fire spillbare karakterer (Fighter, Samurai, Shinobi og Destiny) har hver sine animasjoner, med angrep, blokk, jump attack og spesialangrep.",
+        "Alt er skrevet i ren JavaScript mot canvas-API-et — fysikk, kollisjon, kamera og animasjon er implementert fra bunnen uten spillmotor eller biblioteker. Rundt 6 300 linjer i én motorfil, servert av en Node-server uten byggesteg."
       ],
       "highlights": [
-        "Datadrevet kortmotor med gjenbrukbare effekter",
-        "Prosedyregenerert tårnprogresjon",
-        "Turbasert kamp med kortstokk-bygging"
+        "Egen fysikk-, kollisjons- og kameramotor i ren JavaScript",
+        "Fire spillbare karakterer med kamp, blokk og spesialangrep",
+        "Bålplass-checkpoints og bosskamper på tvers av fem områder",
+        "Null avhengigheter og null byggesteg — `node server.js` og du er i gang"
       ]
     },
     {
@@ -78,51 +106,52 @@
       "title": "FolieGutta",
       "tagline": "Bedriftsnettside for bilfoliering",
       "category": "web",
-      "featured": true,
+      "featured": false,
       "year": "2026",
       "role": "Design og utvikling",
-      "glyph": "◐",
-      "accent": ["#1D1D1F", "#636366"],
+      "accent": ["#F5C518", "#1D1D1F"],
       "tech": ["HTML", "CSS", "JavaScript"],
       "private": true,
+      "media": { "type": "image", "src": "bilder/foliegutta.webp" },
       "links": {},
-      "summary": "Komplett nettside for et bilfolieringsfirma — galleri, tjenester og kontakt, bygget uten rammeverk.",
+      "summary": "Komplett nettside for et bilfolieringsfirma i Bø — galleri, tjenester og tilbudsskjema, bygget uten rammeverk.",
       "description": [
-        "FolieGutta er en bedriftsnettside for et firma som driver med bilfoliering. Siden viser frem tidligere jobber i et bildegalleri, forklarer tjenestene og gjør det enkelt å ta kontakt.",
-        "Alt er bygget i ren HTML, CSS og JavaScript uten rammeverk, med en egen liten Node-basert statisk server for lokal utvikling. Underveis ble prosjektet restrukturert fra én stor HTML-fil til separate CSS- og JS-moduler.",
+        "FolieGutta er en bedriftsnettside for et bilfolieringsfirma i Bø i Telemark. Siden viser frem tidligere jobber i et bildegalleri med lysboks, forklarer tjenestene, og lar kunder be om et uforpliktende tilbud.",
+        "Siden har også en interaktiv demo der du kan leke med farge, glans og sotgrad på en bil før du bestiller.",
+        "Alt er bygget i ren HTML, CSS og JavaScript uten rammeverk, med en egen Node-basert statisk server for lokal utvikling. Underveis ble prosjektet restrukturert fra én stor HTML-fil til separate CSS- og JS-moduler.",
         "Hovedutfordringen var å presentere mange høyoppløselige bilder av biler uten at siden ble treg."
       ],
       "highlights": [
-        "Bildegalleri med tidligere folieringsjobber",
-        "Responsivt design uten rammeverk",
-        "Egen Node-dev-server for lokal utvikling"
+        "Bildegalleri med lysboks for tidligere folieringsjobber",
+        "Interaktiv konfigurator for farge, glans og sotgrad",
+        "Tilbudsskjema og FAQ-seksjon",
+        "Responsivt design helt uten rammeverk"
       ]
     },
     {
-      "id": "jumpking",
-      "title": "Jump King Prototype",
-      "tagline": "Canvas-plattformer i nettleseren",
-      "category": "spill",
+      "id": "designprototype",
+      "title": "Min eiendom",
+      "tagline": "Designprototype for Kristiansand kommune",
+      "category": "web",
       "featured": false,
       "year": "2026",
-      "role": "Programmering",
-      "glyph": "▲",
-      "accent": ["#30D158", "#0A84FF"],
-      "tech": ["JavaScript", "Canvas", "Node.js"],
-      "private": false,
-      "links": {
-        "repo": "https://github.com/Kri1410/jumpKing"
-      },
-      "summary": "Nettleserprototype inspirert av Jump King, med egen fysikkmotor og canvas-rendering — ingen biblioteker.",
+      "role": "UX og prototyping",
+      "accent": ["#0A84FF", "#0B3B70"],
+      "tech": ["HTML", "CSS", "JavaScript", "UX"],
+      "private": true,
+      "media": { "type": "image", "src": "bilder/mineiendom.webp" },
+      "links": {},
+      "summary": "Klikkbar prototype for en kommunal eiendomstjeneste, laget for brukertesting før utvikling.",
       "description": [
-        "En prototype av et presisjonsplattformspill inspirert av Jump King, der hele hoppet lades opp og ikke kan avbrytes. Én feilberegning og du faller flere skjermer ned.",
-        "Alt er skrevet i ren JavaScript mot canvas-API-et: kollisjonsdeteksjon, gravitasjon, hoppkurver og kamerastyring er implementert fra bunnen uten spillmotor eller biblioteker.",
-        "Kjøres med en enkel Node-server — ingen byggesteg eller installasjon."
+        "«Min eiendom» er en interaktiv designprototype for en kommunal tjeneste der innbyggere skal finne samlet informasjon om egen eiendom: eiendomsskatt, eierforhold, areal, byggesaker, dokumenter og frister.",
+        "Prototypen er bygget som en klikkbar nettside fremfor statiske skisser, slik at flyten kunne testes på ekte brukere før noe ble utviklet på ordentlig. Alt innhold er oppdiktede eksempeldata.",
+        "Arbeidet handlet mest om informasjonsarkitektur: hvordan komplekse kommunale data kan presenteres slik at en vanlig innbygger faktisk forstår dem — derfor «Det viktigste, samlet og forklart» som ledetråd, en sammendragsboks med neste frist øverst, og hurtigvalg for de vanligste oppgavene."
       ],
       "highlights": [
-        "Egen fysikk- og kollisjonsmotor i ren JavaScript",
-        "Canvas-rendering uten rammeverk",
-        "Null byggesteg — `node server.js` og du er i gang"
+        "Klikkbar prototype for brukertesting, ikke statiske skisser",
+        "Sammendrag med frister, eiendomsskatt og eierforhold øverst",
+        "Kartvisning med grunnkart, flyfoto, reguleringsplan og byggegrenser",
+        "Fokus på informasjonsarkitektur og klarspråk"
       ]
     },
     {
@@ -133,109 +162,23 @@
       "featured": false,
       "year": "2026",
       "role": "Design og utvikling",
-      "glyph": "▤",
       "accent": ["#0A84FF", "#5E5CE6"],
       "tech": ["Next.js", "TypeScript", "React"],
       "private": true,
+      "media": { "type": "image", "src": "bilder/cv.webp" },
       "links": {},
       "summary": "En CV som nettside i stedet for PDF, bygget med Next.js App Router og TypeScript.",
       "description": [
-        "En personlig CV-nettside bygget med Next.js og TypeScript. Målet var å gjøre CV-en til noe man kan bla i og navigere, i stedet for et statisk PDF-dokument.",
+        "En personlig CV-nettside bygget med Next.js og TypeScript. Målet var å gjøre CV-en til noe man kan navigere og bla i, i stedet for et statisk PDF-dokument.",
+        "Siden er delt i seksjoner for om meg, prosjekter, erfaring og kontakt, med mørkt tema og en nedlastbar PDF-versjon for de som vil ha den likevel.",
         "Bruker Next.js App Router med typet innhold, slik at erfaring, utdanning og ferdigheter er strukturert data fremfor hardkodet markup."
       ],
       "highlights": [
         "Next.js App Router med TypeScript",
         "Innhold som strukturert, typet data",
+        "Mørkt tema og nedlastbar PDF-versjon",
         "Responsivt oppsett fra mobil til desktop"
       ]
-    },
-    {
-      "id": "designprototype",
-      "title": "MinEiendom Kristiansand",
-      "tagline": "Designprototype for kommunal tjeneste",
-      "category": "web",
-      "featured": false,
-      "year": "2026",
-      "role": "UX og prototyping",
-      "glyph": "◱",
-      "accent": ["#FF9F0A", "#FF375F"],
-      "tech": ["HTML", "CSS", "JavaScript", "UX"],
-      "private": true,
-      "links": {},
-      "summary": "Klikkbar prototype for en kommunal eiendomstjeneste, laget for brukertesting før utvikling.",
-      "description": [
-        "En interaktiv designprototype for «MinEiendom» i Kristiansand kommune — en tjeneste der innbyggere skal finne informasjon om egen eiendom.",
-        "Prototypen er bygget som en klikkbar nettside fremfor statiske skisser, slik at flyten kunne testes på ekte brukere før noe ble utviklet på ordentlig.",
-        "Arbeidet handlet mest om informasjonsarkitektur: hvordan komplekse kommunale data kan presenteres slik at en vanlig innbygger faktisk forstår dem."
-      ],
-      "highlights": [
-        "Klikkbar prototype for brukertesting",
-        "Fokus på informasjonsarkitektur",
-        "Laget for Kristiansand kommune"
-      ]
-    },
-    {
-      "id": "sem02v24",
-      "title": "Systemprogrammering i C",
-      "tagline": "IS-105, Universitetet i Agder",
-      "category": "studier",
-      "featured": false,
-      "year": "2024",
-      "role": "Student",
-      "glyph": "⌘",
-      "accent": ["#636366", "#8E8E93"],
-      "tech": ["C"],
-      "private": false,
-      "links": {
-        "repo": "https://github.com/Kri1410/sem02v24"
-      },
-      "summary": "Seminaroppgaver i C — minnehåndtering, pekere og lavnivå systemprogrammering.",
-      "description": [
-        "Seminararbeid fra emnet IS-105 ved Universitetet i Agder, med fokus på C som språk: manuell minnehåndtering, pekeraritmetikk og hvordan ting faktisk ser ut under abstraksjonene."
-      ],
-      "highlights": []
-    },
-    {
-      "id": "seminar",
-      "title": "Go-profilering",
-      "tagline": "pprof og ytelsesanalyse",
-      "category": "studier",
-      "featured": false,
-      "year": "2024",
-      "role": "Student",
-      "glyph": "◎",
-      "accent": ["#64D2FF", "#0A84FF"],
-      "tech": ["Go", "pprof"],
-      "private": false,
-      "links": {
-        "repo": "https://github.com/Kri1410/seminar"
-      },
-      "summary": "Ytelsesprofilering av Go-programmer med pprof, som del av IS-105 ved UiA.",
-      "description": [
-        "Seminaroppgave om profilering i Go: å bruke pprof til å finne hvor tiden og minnet faktisk går i et program, fremfor å gjette."
-      ],
-      "highlights": []
-    },
-    {
-      "id": "pyret-oblig",
-      "title": "Programmeringsobligatoriske",
-      "tagline": "IS-114, funksjonell programmering i Pyret",
-      "category": "studier",
-      "featured": false,
-      "year": "2023",
-      "role": "Student",
-      "glyph": "λ",
-      "accent": ["#BF5AF2", "#5E5CE6"],
-      "tech": ["Pyret", "Funksjonell programmering"],
-      "private": false,
-      "links": {
-        "repo": "https://github.com/Kri1410/IS-114-Progoblig-02-individuell-del"
-      },
-      "summary": "Obligatoriske innleveringer i funksjonell programmering — rekursjon, datatyper og testdrevet utvikling.",
-      "description": [
-        "Samling av obligatoriske oppgaver fra IS-114 ved UiA, skrevet i Pyret. Emnet handlet om funksjonell programmering: rekursjon, algebraiske datatyper og en testdrevet arbeidsmåte der man skriver eksemplene før implementasjonen."
-      ],
-      "highlights": []
     }
   ]
 }
