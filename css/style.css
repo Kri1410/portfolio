@@ -387,11 +387,10 @@ button {
   /* 340px som minstemål gir tre romslige kolonner på full bredde i stedet
      for fire trange — mer plass per prosjekt, ikke flere kort per rad */
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  /* dense lar smale kort etterfylle hullene brede kort etterlater */
-  grid-auto-flow: row dense;
-  /* start, ikke stretch: et kort skal ha sin egen høyde, ikke arve
-     høyden fra det høyeste kortet i raden og få dødt rom under teksten */
-  align-items: start;
+  /* Alle prosjektkort skal ha nøyaktig samme størrelse: like brede kolonner,
+     og 1fr på radene gjør hver rad like høy som den høyeste — kombinert med
+     stretch (standard) får hvert kort samme høyde uansett tekstlengde. */
+  grid-auto-rows: 1fr;
   gap: 22px;
 }
 
@@ -416,14 +415,8 @@ button {
 .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
 .card:active { transform: translateY(-1px) scale(0.994); }
 
-/* Fremhevet prosjekt tar to kolonner der det er plass */
-@media (min-width: 900px) {
-  .card--featured { grid-column: span 2; }
-  .card--featured .card__title { font-size: 1.6rem; }
-  /* Spillscenene er komponert for et bredt format. Skjermbilder beholder
-     16:10 slik at ingenting blir beskåret. */
-  .card--featured .card__poster:has(.demo) { aspect-ratio: 21 / 9; }
-}
+/* Fremhevede prosjekter har samme kortstørrelse som resten — de skiller seg
+   ut på rekkefølge, ikke på format. */
 
 .card__poster {
   position: relative;
@@ -478,6 +471,9 @@ button {
   flex-direction: column;
   gap: 8px;
   padding: 20px 22px 22px;
+  /* fyller resten av kortet, slik at like høye kort ikke får dødt rom
+     mellom bilde og tekst */
+  flex: 1;
 }
 
 .card__kicker {
@@ -502,6 +498,9 @@ button {
   padding: 0;
   list-style: none;
 }
+/* Teknologimerkene legger seg nederst i kortet, så de står på linje på tvers
+   av kortene selv om sammendragene er ulikt lange. */
+.card__body .tags { margin-top: auto; padding-top: 6px; }
 .tags li {
   padding: 4px 10px;
   border-radius: 999px;
